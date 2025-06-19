@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 str1 = " "
 
-@app.route('/gett', methods=['POST'])
+@app.route('/gett', methods=['GET'])
 def gett():
     global str1
     data = request.get_json()
