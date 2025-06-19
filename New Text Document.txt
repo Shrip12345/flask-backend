@@ -1,0 +1,31 @@
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote -v
+git remote set-url origin https://github.com/Shrip12345/flask-backend.git
+git push -u origin main
+
+
+Step 5: Deploy on Render
+Visit https://render.com
+
+Sign up or log in
+
+Click “New +” → “Web Service”
+
+Connect your GitHub repo
+
+Select your repo (e.g., flask-on-render)
+
+Configure:
+
+Environment: Python
+
+Build Command: pip install -r requirements.txt
+
+Start Command: gunicorn app:app
+
+Instance type: Free
+
+Click Create Web Service
