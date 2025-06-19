@@ -1,10 +1,13 @@
 from flask import Flask
 
-app = Flask(__name__)
+from flask_cors import CORS
 
-@app.route('/')
-def home():
-    return "Hello from Rendergggg!"
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/hello', methods=['GET'])
+def hello():
+    return jsonify({"message": "Hello, World!"})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
