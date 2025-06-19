@@ -7,9 +7,8 @@ str1 = " "
 @app.route('/gett', methods=['GET'])
 def gett():
     global str1
-    data = request.get_json()
-    name = data.get('message', 'World')
-    str1 = "Hello, " + name  # ✅ update global variable
+    name = request.args.get('message', 'World')  # ✅ get from query string
+    str1 = "Hello, " + name
     return jsonify({"message": f"Name received: {str1}"})
 
 @app.route('/hello', methods=['GET'])
