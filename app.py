@@ -2,13 +2,13 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-str1 = "Hello, World!"
+str1 = " "
 
 @app.route('/gett', methods=['POST'])
 def gett():
     global str1
     data = request.get_json()
-    name = data.get('name', 'World')
+    name = data.get('message', 'World')
     str1 = "Hello, " + name  # ✅ update global variable
     return jsonify({"message": f"Name received: {str1}"})
 
