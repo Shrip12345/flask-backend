@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/add', methods=['GET'])
+@app.route('/add', methods=['POST'])
 def add_number():
     number = request.args.get('number', default=None, type=int)
 
