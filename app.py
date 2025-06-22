@@ -4,15 +4,12 @@ import yfinance as yf
 
 app = Flask(__name__)
 
-<<<<<<< HEAD
 # List of top NSE tickers
 TOP_TICKERS = [
     "RELIANCE.NS", "TCS.NS", "HDFCBANK.NS", "BHARTIARTL.NS",
     "ICICIBANK.NS", "INFY.NS", "SBIN.NS", "HINDUNILVR.NS", "ITC.NS"
 ]
 
-=======
->>>>>>> c37d0ec (first commit)
 @app.route('/add', methods=['GET'])
 def add_number():
     number = request.args.get('number', default=None, type=int)
@@ -24,7 +21,6 @@ def add_number():
     return jsonify({"result": result})
 
 
-<<<<<<< HEAD
 @app.route('/loadstocks', methods=['GET'])
 def load_stocks():
     best = {"ticker": None, "marketCap": 0, "longName": None}
@@ -55,8 +51,6 @@ def load_stocks():
         "market_cap_inr_crore": mcap_inr,
         "as_of": "Live"
     })
-=======
->>>>>>> c37d0ec (first commit)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
