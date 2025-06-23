@@ -2,3 +2,7 @@ flask
 flask-cors
 gunicorn
 yfinance
+pydantic
+pandas
+numpy
+requests
