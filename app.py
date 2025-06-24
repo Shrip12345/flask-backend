@@ -79,9 +79,13 @@ def add_numberrr():
     if number is None or not isinstance(number, int):
         return jsonify({"error": "Please provide a valid integer 'number' in the request body."}), 400
 
-    return jsonify({"result": number + amount+monthly_incomee+fixed_expensess+current_savingss})
 
-@app.route('/loadstocks', methods=['GET'])
+    return jsonify({"result":number + amount,
+                    "monthly_saving_required":monthly_incomee,
+                    "feasible":fixed_expensess,
+                    "completion_time_estimate":current_savingss})
+
+"goal@app.route('/loadstocks', methods=['GET'])
 def load_stocks():
     TOP_TICKERS = [
         "RELIANCE.NS", "TCS.NS", "HDFCBANK.NS", "BHARTIARTL.NS",
