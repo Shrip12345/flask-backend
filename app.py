@@ -67,7 +67,7 @@ def add_number():
 
 
 @app.route('/addnum', methods=['POST'])
-def add_number():
+def add_numberrr():
     data = request.get_json()
     number = data.get('number')
 
