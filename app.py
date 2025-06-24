@@ -65,6 +65,17 @@ def add_number():
         return jsonify({"error": "Please pass a number parameter"}), 400
     return jsonify({"result": number + 100})
 
+
+@app.route('/addnum', methods=['POST'])
+def add_number():
+    data = request.get_json()
+    number = data.get('number')
+
+    if number is None or not isinstance(number, int):
+        return jsonify({"error": "Please provide a valid integer 'number' in the request body."}), 400
+
+    return jsonify({"result": number + 100})
+
 @app.route('/loadstocks', methods=['GET'])
 def load_stocks():
     TOP_TICKERS = [
