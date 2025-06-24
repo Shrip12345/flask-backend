@@ -72,10 +72,14 @@ def add_numberrr():
     number = data.get('number')
     amount=data.get('amount')
 
+    monthly_income=data.get('monthly_income')
+    fixed_expenses=data.get('fixed_expenses')
+    current_savings==data.get('current_savings')
+
     if number is None or not isinstance(number, int):
         return jsonify({"error": "Please provide a valid integer 'number' in the request body."}), 400
 
-    return jsonify({"result": number + amount})
+    return jsonify({"result": number + amount+monthly_income+fixed_expenses+current_savings})
 
 @app.route('/loadstocks', methods=['GET'])
 def load_stocks():
