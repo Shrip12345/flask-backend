@@ -74,7 +74,7 @@ def add_numberrr():
 
     monthly_incomee=data.get('monthly_income')
     fixed_expensess=data.get('fixed_expenses')
-    current_savingss==data.get('current_savings')
+    current_savingss=data.get('current_savings')
 
     if number is None or not isinstance(number, int):
         return jsonify({"error": "Please provide a valid integer 'number' in the request body."}), 400
