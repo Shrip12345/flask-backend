@@ -85,7 +85,7 @@ def add_numberrr():
                     "feasible":fixed_expensess,
                     "completion_time_estimate":current_savingss})
 
-"goal@app.route('/loadstocks', methods=['GET'])
+@app.route('/loadstocks', methods=['GET'])
 def load_stocks():
     TOP_TICKERS = [
         "RELIANCE.NS", "TCS.NS", "HDFCBANK.NS", "BHARTIARTL.NS",
