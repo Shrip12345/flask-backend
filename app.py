@@ -69,22 +69,33 @@ def add_number():
 @app.route('/addnum', methods=['POST'])
 def add_numberrr():
     data = request.get_json()
-    number = data.get('number')
-    amount=data.get('amount')
 
-    monthly_incomee=data.get('monthly_income')
-    fixed_expensess=data.get('fixed_expenses')
-    current_savingss=data.get('current_savings')
+    # Extracting values from the request body
+    goal_name = data.get('goal_name')
+    target_amount = data.get('target_amount')
+    target_date = data.get('target_date')
+    importance_level = data.get('importance_level')
+    monthly_income = data.get('monthly_income')
+    fixed_expenses = data.get('fixed_expenses')
+    current_savings = data.get('current_savings')
 
-    if number is None or not isinstance(number, int):
-        return jsonify({"error": "Please provide a valid integer 'number' in the request body."}), 400
+    # OPTIONAL: Validation (e.g., ensure values are present and correct type)
+    if not all([goal_name, target_amount, target_date, importance_level, monthly_income, fixed_expenses, current_savings]):
+        return jsonify({"error": "Missing one or more required fields"}), 400
 
+    # You had this check below but variable 'number' was never defined
+    # So removed that part
 
-    return jsonify({"result":number + amount,
-                    "monthly_saving_required":monthly_incomee,
-                    "feasible":fixed_expensess,
-                    "completion_time_estimate":current_savingss})
-
+    # Example echo back
+    return jsonify({
+        "goal_name": goal_name,
+        "target_amount": target_amount,
+        "target_date": target_date,
+        "importance_level": importance_level,
+        "monthly_income": monthly_income,
+        "fixed_expenses": fixed_expenses,
+        "current_savings": current_savings
+    })
 @app.route('/loadstocks', methods=['GET'])
 def load_stocks():
     TOP_TICKERS = [
