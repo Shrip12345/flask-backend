@@ -49,28 +49,12 @@ def add_number():
 def add_numberrr():
     data = request.get_json()
 
-    '''
-    # Extracting values from the request body
-    goal_name = data.get('goal_name')
-    target_amount = data.get('target_amount')
-    #target_date = data.get('target_date')
-    #importance_level = data.get('importance_level')
-    monthly_income = data.get('monthly_income')
-    fixed_expenses = data.get('fixed_expenses')
-    current_savings = data.get('current_savings')
-    months_left =12
-    annual_roi=12
-    '''
-    
-    goal_name = "Buy a car"
-    target_amount = 10000
-    #target_date = data.get('target_date')
-    #importance_level = data.get('importance_level')
-    monthly_income = 150
-    fixed_expenses = 20
-    current_savings =0
-    months_left =12
-    annual_roi=12
+    target_amount = float(data.get('target_amount', 0))
+    monthly_income = float(data.get('monthly_income', 0))
+    fixed_expenses = float(data.get('fixed_expenses', 0))
+    current_savings = float(data.get('current_savings', 0))
+    months_left = int(data.get('months_left', 12))  # Default to 12 if not passed
+    annual_roi = float(data.get('annual_roi', 12))  # Default to 12% if not passed
 
     # OPTIONAL: Validation (e.g., ensure values are present and correct type)
     if not all([goal_name, target_amount, monthly_income, fixed_expenses, current_savings]):
