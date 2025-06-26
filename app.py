@@ -63,8 +63,8 @@ def add_numberrr():
     #today = datetime.today()
     
     # Assuming target year/month are extracted from goal.target_date
-    target_year = 2030
-    target_month = 12
+    #target_year = 2030
+    #target_month = 12
     
     # 1️⃣ Fix the incorrect syntax for months_left calculation
     months_left =50 # (target_year - today.year) * 12 + (target_month - today.month)
