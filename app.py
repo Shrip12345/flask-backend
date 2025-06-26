@@ -54,20 +54,11 @@ def add_numberrr():
     fixed_expenses = data.get('fixed_expenses')
     current_savings = data.get('current_savings')
 
-'''
     # OPTIONAL: Validation (e.g., ensure values are present and correct type)
     if not all([goal_name, target_amount, monthly_income, fixed_expenses, current_savings]):
         return jsonify({"error": "Missing one or more required fields"}), 400
-'''
-    
-    #today = datetime.today()
-    
-    # Assuming target year/month are extracted from goal.target_date
-    #target_year = 2030
-    #target_month = 12
-    
-    # 1️⃣ Fix the incorrect syntax for months_left calculation
-    months_left =50 
+
+    months_left =50
     months_left = max(months_left, 1)
 
     # 2️⃣ Basic financial variables
