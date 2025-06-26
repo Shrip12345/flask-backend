@@ -73,8 +73,8 @@ def add_numberrr():
     # Extracting values from the request body
     goal_name = data.get('goal_name')
     target_amount = data.get('target_amount')
-    target_date = data.get('target_date')
-    importance_level = data.get('importance_level')
+    #target_date = data.get('target_date')
+    #importance_level = data.get('importance_level')
     monthly_income = data.get('monthly_income')
     fixed_expenses = data.get('fixed_expenses')
     current_savings = data.get('current_savings')
@@ -89,12 +89,12 @@ def add_numberrr():
     # Example echo back
     return jsonify({
         "goal_name": goal_name,
-        "target_amount": target_amount,
-        "target_date": target_date,
-        "importance_level": importance_level,
-        "monthly_income": monthly_income,
-        "fixed_expenses": fixed_expenses,
-        "current_savings": current_savings
+        "target_amount": target_amount+10,
+        #"target_date": target_date,
+        #"importance_level": importance_level,
+        "monthly_income": monthly_income+20,
+        "fixed_expenses": fixed_expenses+30,
+        "current_savings": current_savings+40
     })
 @app.route('/loadstocks', methods=['GET'])
 def load_stocks():
