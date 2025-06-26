@@ -49,6 +49,7 @@ def add_number():
 def add_numberrr():
     data = request.get_json()
 
+    goal_name= data.get('goal_name')
     target_amount = float(data.get('target_amount', 0))
     monthly_income = float(data.get('monthly_income', 0))
     fixed_expenses = float(data.get('fixed_expenses', 0))
