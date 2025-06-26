@@ -60,14 +60,14 @@ def add_numberrr():
         return jsonify({"error": "Missing one or more required fields"}), 400
 '''
     
-    today = datetime.today()
+    #today = datetime.today()
     
     # Assuming target year/month are extracted from goal.target_date
     target_year = 2030
     target_month = 12
     
     # 1️⃣ Fix the incorrect syntax for months_left calculation
-    months_left = (target_year - today.year) * 12 + (target_month - today.month)
+    months_left =50 # (target_year - today.year) * 12 + (target_month - today.month)
     months_left = max(months_left, 1)
 
     # 2️⃣ Basic financial variables
