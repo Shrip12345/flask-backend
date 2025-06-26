@@ -54,10 +54,11 @@ def add_numberrr():
     fixed_expenses = data.get('fixed_expenses')
     current_savings = data.get('current_savings')
 
+'''
     # OPTIONAL: Validation (e.g., ensure values are present and correct type)
     if not all([goal_name, target_amount, monthly_income, fixed_expenses, current_savings]):
         return jsonify({"error": "Missing one or more required fields"}), 400
-
+'''
     
     today = datetime.today()
     
