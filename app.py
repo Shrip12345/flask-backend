@@ -67,7 +67,7 @@ def add_numberrr():
     #target_month = 12
     
     # 1️⃣ Fix the incorrect syntax for months_left calculation
-    months_left =50 # (target_year - today.year) * 12 + (target_month - today.month)
+    months_left =50 
     months_left = max(months_left, 1)
 
     # 2️⃣ Basic financial variables
