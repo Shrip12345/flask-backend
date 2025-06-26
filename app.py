@@ -54,7 +54,11 @@ def add_numberrr():
     monthly_income = float(data.get('monthly_income', 0))
     fixed_expenses = float(data.get('fixed_expenses', 0))
     current_savings = float(data.get('current_savings', 0))
-    months_left = int(data.get('months_left', 12))  # Default to 12 if not passed
+    months_left = data.get('months_left')
+    if months_left is None:
+        months_left = 12
+    else:
+        months_left = int(months_left)
     annual_roi = float(data.get('annual_roi', 12))  # Default to 12% if not passed
 
     # OPTIONAL: Validation (e.g., ensure values are present and correct type)
