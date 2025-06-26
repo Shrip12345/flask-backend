@@ -80,7 +80,7 @@ def add_numberrr():
     current_savings = data.get('current_savings')
 
     # OPTIONAL: Validation (e.g., ensure values are present and correct type)
-    if not all([goal_name, target_amount, target_date, importance_level, monthly_income, fixed_expenses, current_savings]):
+    if not all([goal_name, target_amount, monthly_income, fixed_expenses, current_savings]):
         return jsonify({"error": "Missing one or more required fields"}), 400
 
     # You had this check below but variable 'number' was never defined
