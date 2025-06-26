@@ -29,31 +29,6 @@ class PlanRequest(BaseModel):
 # ---------------------------
 # Core Logic
 # ---------------------------
-def calculate_plan(goal: FinancialGoal, finances: IncomeExpense):
-    today = datetime.today()
-    months_left = (goal.target_date.year - today.year) * 12 + (goal.target_date.month - today.month)
-    months_left = max(months_left, 1)
-    amount_needed = goal.target_amount - finances.current_savings
-    monthly_required = max(amount_needed / months_left, 0)
-    available_to_save = finances.monthly_income - finances.fixed_expenses
-
-    if monthly_required <= available_to_save:
-        feasible = True
-        advice = "Stay consistent and you'll reach your goal on time."
-        time_to_goal = goal.target_date.strftime("%B %Y")
-    else:
-        feasible = False
-        shortfall = monthly_required - available_to_save
-        advice = f"You need to save ₹{shortfall:.2f} more monthly. Consider cutting non-essential expenses or increasing income."
-        time_to_goal = None
-
-    return {
-        "goal_name": goal.goal_name,
-        "monthly_saving_required": round(monthly_required, 2),
-        "feasible": feasible,
-        "advice": advice,
-        "completion_time_estimate": time_to_goal
-    }
 
 # ---------------------------
 # API Endpoints
@@ -83,19 +58,54 @@ def add_numberrr():
     if not all([goal_name, target_amount, monthly_income, fixed_expenses, current_savings]):
         return jsonify({"error": "Missing one or more required fields"}), 400
 
-    # You had this check below but variable 'number' was never defined
-    # So removed that part
+    
+    today = datetime.today()
+    
+    # Assuming target year/month are extracted from goal.target_date
+    target_year = 2030
+    target_month = 12
+    
+    # 1️⃣ Fix the incorrect syntax for months_left calculation
+    months_left = (target_year - today.year) * 12 + (target_month - today.month)
+    months_left = max(months_left, 1)
 
-    # Example echo back
+    # 2️⃣ Basic financial variables
+    amount_needed = target_amount - current_savings
+    available_to_save = monthly_income - fixed_expenses
+    
+    # 3️⃣ Add support for expected return (ROI)
+    roi_percent = 0  # Change this to a dynamic field if you want to support user input
+    monthly_rate = roi_percent / 12 / 100  # Convert annual % to monthly decimal
+
+    # 4️⃣ Calculate required monthly savings based on compound interest formula
+    if monthly_rate == 0:
+        monthly_required = amount_needed / months_left
+    else:
+        monthly_required = amount_needed * monthly_rate / (((1 + monthly_rate) ** months_left) - 1)
+
+    # 5️⃣ Advice and feasibility
+    if monthly_required <= available_to_save:
+        feasible = True
+        advice = f"Invest ₹{monthly_required:.2f}/month at {roi_percent}% annual return to reach your goal."
+        time_to_goal = None #f"{target_date.strftime('%B %Y')}"
+    else:
+        feasible = False
+        shortfall = monthly_required - available_to_save
+        advice = (
+            f"You need to save ₹{shortfall:.2f} more monthly. "
+            f"Try reducing expenses or increasing income."
+        )
+        time_to_goal = None
+
+    # 6️⃣ Return structured output
     return jsonify({
         "goal_name": goal_name,
-        "target_amount": target_amount+10,
-        #"target_date": target_date,
-        #"importance_level": importance_level,
-        "monthly_income": monthly_income+20,
-        "fixed_expenses": fixed_expenses+30,
-        "current_savings": current_savings+40
+        "monthly_saving_required": round(monthly_required, 2),
+        "feasible": feasible,
+        "advice": advice,
+        "completion_time_estimate": time_to_goal
     })
+
 @app.route('/loadstocks', methods=['GET'])
 def load_stocks():
     TOP_TICKERS = [
@@ -124,16 +134,6 @@ def load_stocks():
         "market_cap_inr_crore": mcap_inr,
         "as_of": "Live"
     })
-
-@app.route('/loaddata', methods=['POST'])
-def load_data():
-    try:
-        data = request.get_json()
-        plan_request = PlanRequest(**data)
-        response = [calculate_plan(goal, plan_request.finances) for goal in plan_request.goals]
-        return jsonify(response)
-    except Exception as e:
-        return jsonify({"error": str(e)}), 400
 
 # ---------------------------
 # Run Server
