@@ -78,6 +78,19 @@ def add_numberrr():
         "advice": a,
     })
 
+
+@app.route('/top50funds', methods=['GET'])
+def get_top_50_funds():
+    # Use dynamic path to current file location
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    excel_path = os.path.join(base_path, 'new', 'combined_output.xlsx')
+
+    # Read Excel file
+    try:
+        df = pd.read_excel(excel_path).head(50)
+        return jsonify(df.to_dict(orient='records'))
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 # ---------------------------
 # Run Server
 # ---------------------------
