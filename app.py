@@ -4,6 +4,7 @@ import yfinance as yf
 from pydantic import BaseModel
 from typing import List, Optional
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 CORS(app)
