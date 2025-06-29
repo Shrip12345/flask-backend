@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 from datetime import datetime
 import os
+import pandas as pd
 
 app = Flask(__name__)
 CORS(app)
