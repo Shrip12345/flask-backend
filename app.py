@@ -90,14 +90,14 @@ def get_top_50_funds():
     # Read Excel file
     try:
         df = pd.read_excel(excel_path).head(50)
-        # Rename columns to FlutterFlow-friendly keys (no spaces, PascalCase or snake_case)
-        df.rename(columns={
-            'Scheme_Name': 'scheme_name',
-            'Benchmark': 'benchmark',
-            '1Y_Return': 'return_1y',
-            '3Y_Return': 'return_3y',
-            '5Y_Return': 'return_5y'
-        }, inplace=True)
+        # Add Sr. No. column
+        df.reset_index(drop=True, inplace=True)
+        df['sr_no'] = df.index + 1
+
+        # Reorder and rename columns
+        df = df[['sr_no', 'Scheme_Name', '1Y_Return', '3Y_Return', '5Y_Return']]
+        df.columns = ['sr_no', 'scheme_name', 'return_1y', 'return_3y', 'return_5y']
+
 
          # Return under a top-level key
         return jsonify({'funds': df.to_dict(orient='records')})
