@@ -51,12 +51,21 @@ def add_number():
 def add_numberrr():
     data = request.get_json()
 
-    goal_name= data.get('goal_name')
+    #goal_name= data.get('goal_name')
     target_amount = float(data.get('target_amount', 0))
-    monthly_income = float(data.get('monthly_income', 0))
-    fixed_expenses = float(data.get('fixed_expenses', 0))
-    current_savings = float(data.get('current_savings', 0))
-    months_left = data.get('months_left')
+    #monthly_income = float(data.get('monthly_income', 0))
+    #fixed_expenses = float(data.get('fixed_expenses', 0))
+    #current_savings = float(data.get('current_savings', 0))
+    months_left = int(data.get('months_left',0))
+    investtype=data.get('investtype')
+    
+    # OPTIONAL: Validation (e.g., ensure values are present and correct type)
+    if not all([target_amount, months_left, investtype]):
+        return jsonify({"error": "Missing one or more required fields"}), 400
+
+    
+
+    '''
     if months_left is None:
         months_left = 12
     else:
@@ -79,7 +88,12 @@ def add_numberrr():
         "feasible": f,
         "advice": a,
     })
-
+    '''
+     return jsonify({
+        "monthly_saving_required":target_amount,
+        "feasible": months_left,
+        "advice": investtype,
+    })
 
 @app.route('/top50funds', methods=['GET'])
 def get_top_50_funds():
