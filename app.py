@@ -47,23 +47,38 @@ def add_number():
     return jsonify({"result": number + 100})
 
 
+
+
+
+
+
 @app.route('/addnum', methods=['POST'])
 def add_numberrr():
     data = request.get_json()
 
-    #goal_name= data.get('goal_name')
-    target_amount = float(data.get('target_amount', 0))
-    #monthly_income = float(data.get('monthly_income', 0))
-    #fixed_expenses = float(data.get('fixed_expenses', 0))
-    #current_savings = float(data.get('current_savings', 0))
-    months_left = int(data.get('months_left',0))
-    investtype="Hello"
-    #data.get('investtype')
-    
-    # OPTIONAL: Validation (e.g., ensure values are present and correct type)
+    data = request.get_json()
+
+    # Extract and validate fields
+    try:
+        target_amount = float(data.get('target_amount', 0))
+        months_left = int(data.get('months_left', 0))
+        investtype = "hello"
+        #data.get('investtype', '').strip()
+    except (ValueError, TypeError):
+        return jsonify({"error": "Invalid input format"}), 400
+
     if not all([target_amount, months_left, investtype]):
         return jsonify({"error": "Missing one or more required fields"}), 400
 
+    # Simple monthly SIP calculation (without interest)
+    monthly_saving_required = round(target_amount / months_left, 2)
+
+    # Return structured output
+    return jsonify({
+        "monthly_saving_required": monthly_saving_required,
+        "feasible": months_left > 0,
+        "advice": investtype
+    })
     
 
     '''
@@ -90,11 +105,7 @@ def add_numberrr():
         "advice": a,
     })
     '''
-     return jsonify({
-        "monthly_saving_required":target_amount,
-        "feasible": months_left,
-        "advice": investtype,
-    })
+
 
 @app.route('/top50funds', methods=['GET'])
 def get_top_50_funds():
