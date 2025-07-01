@@ -57,7 +57,8 @@ def add_numberrr():
     #fixed_expenses = float(data.get('fixed_expenses', 0))
     #current_savings = float(data.get('current_savings', 0))
     months_left = int(data.get('months_left',0))
-    investtype=data.get('investtype')
+    investtype="Hello"
+    #data.get('investtype')
     
     # OPTIONAL: Validation (e.g., ensure values are present and correct type)
     if not all([target_amount, months_left, investtype]):
