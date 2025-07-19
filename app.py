@@ -21,10 +21,19 @@ def get_top_50():
     
     df = pd.read_excel(file_path)  # Must be uploaded in the same directory
     df = df.head(50)
+     # Optional: Clean NaNs
+    df.fillna("", inplace=True)
 
     # Convert to dictionary
-    result = df.to_dict(orient='records')
-    return jsonify(result)
+    data={
+            "Scheme_Name": df["Scheme_Name"].tolist(),
+            "1Y_Return": df["1Y_Return"].tolist(),
+            "3Y_Return": df["3Y_Return"].tolist(),
+            "5Y_Return": df["5Y_Return"].tolist(),
+            "Benchmark": df["Benchmark"].tolist()
+        }
+    
+    return jsonify(data)
 
 
 def method_SIPCalculate(amount_required, months_left, annual_roi):
