@@ -10,6 +10,23 @@ import pandas as pd
 app = Flask(__name__)
 CORS(app)
 
+
+
+
+
+@app.route('/top50', methods=['GET'])
+def get_top_50():
+     # Use a relative or absolute path
+    file_path = os.path.join(os.path.dirname(__file__), 'new', 'combined_output.xlsx')
+    
+    df = pd.read_excel(file_path)  # Must be uploaded in the same directory
+    df = df.head(50)
+
+    # Convert to dictionary
+    result = df.to_dict(orient='records')
+    return jsonify(result)
+
+
 def method_SIPCalculate(amount_required, months_left, annual_roi):
     monthly_rate = annual_roi / 12 / 100  # Convert annual % to monthly decimal
     if monthly_rate == 0:
