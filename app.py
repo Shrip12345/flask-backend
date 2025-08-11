@@ -24,14 +24,16 @@ def get_top_50():
      # Optional: Clean NaNs
     df.fillna("", inplace=True)
 
-    # Prepare data for dynamic table
-    columns = df.columns.tolist()
-    rows = df.values.tolist()  # Each row is a list of cell values
-
-    return jsonify({
-        "columns": columns,
-        "rows": rows
-    })
+    # Convert to dictionary
+    data={
+            "Scheme_Name": df["Scheme_Name"].tolist(),
+            "1Y_Return": df["1Y_Return"].tolist(),
+            "3Y_Return": df["3Y_Return"].tolist(),
+            "5Y_Return": df["5Y_Return"].tolist(),
+            "Benchmark": df["Benchmark"].tolist()
+        }
+    
+    return jsonify(data)
 
 
 def method_SIPCalculate(amount_required, months_left, annual_roi):
