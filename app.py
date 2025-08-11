@@ -26,13 +26,12 @@ def get_top_50():
 
     # Convert to dictionary
     data={
-            "Scheme_Name": df["Scheme_Name"].tolist(),
-            "1Y_Return": df["1Y_Return"].tolist(),
+            "Scheme_Name": df["Scheme_Name"].tolist()
+        }
+    ''' "1Y_Return": df["1Y_Return"].tolist(),
             "3Y_Return": df["3Y_Return"].tolist(),
             "5Y_Return": df["5Y_Return"].tolist(),
-            "Benchmark": df["Benchmark"].tolist()
-        }
-    
+            "Benchmark": df["Benchmark"].tolist()'''
     return jsonify(data)
 
 
